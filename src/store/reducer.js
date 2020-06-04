@@ -1,5 +1,5 @@
 import {ADD_TODO_ITEM,CHANGE_INPUT_VALUE,DELETE_TODO_ITEM, INIT_LIST_ITEM} from './actionType'
-import store from '.'
+
 const defaultState = {
     inputValue: '123',
     list:[1,2,3]
