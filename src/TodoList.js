@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import store from './store'
-import { getInputChangAction, getDeleteItemAction, getAddItemAction } from './store/actionCreators'
+import { getInputChangAction, getDeleteItemAction, getAddItemAction, initListAction } from './store/actionCreators'
 import TodoListUI from './store/TodoListUI'
-
+import axios from 'axios'
 
 
 export default class TodoList extends Component {
@@ -26,6 +26,15 @@ export default class TodoList extends Component {
         handleItemDelete = {this.handleItemDelete}
         />
         )
+    }
+
+    componentDidMount() {
+        axios.get('/list.json').then((res)=>{
+            const data = res.data
+            const action = initListAction(data)
+            store.dispatch(action)
+            console.log(res)
+        })
     }
 
     handleInputChange(e){
