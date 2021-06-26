@@ -1,17 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import React from "react";
+import ReactDOM from "react-dom";
+import App from './App'
+// impprt logo from './logo.svg'
+const name = "REACAr";
+// const logo = "./logo.svg"
+const obj = {
+  firstname: "HAR",
+  nextname: "sss",
+};
+function forName(name) {
+  return name.firstname + " " + name.nextname;
+}
+const greet = <div>good</div>
+const show = true
+const a =[1,2,3]
+const jsx = (
+  <div>
+    <App></App>
+    <h1>基本使用</h1>
+    <div>hello,{name}</div>
+    <div>{forName(obj)}</div>
+    {show?greet:"登录"}
+    {show&&greet}
+    {/* 登录 */}
+    <ul>
+      {a.map(item=>(
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+    {/* <img src={logo} classNames="logo"></img> */}
+  </div>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(jsx, document.getElementById("root"));
