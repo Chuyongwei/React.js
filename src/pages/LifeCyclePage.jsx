@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 
 class LifeCyclePage extends Component {
 	static defaultProps = {
@@ -15,7 +13,7 @@ class LifeCyclePage extends Component {
 		console.log("constructor");
 	}
 
-	componentWillMount(){
+	UNSAFE_componentWillMount(){
 		console.log("componentWillMount");
 	}
 	componentDidMount(){
@@ -27,7 +25,7 @@ class LifeCyclePage extends Component {
 		// 是否渲染(数据变了)
 		return count!==3
 	}
-	componentWillUpdate(){
+	UNSAFE_componentWillUpdate(){
 		console.log("componentWillUpdate");
 	}
 	componentDidUpdate(){
@@ -55,7 +53,7 @@ export default LifeCyclePage;
 
 class Child extends Component{
 	// 初次加载的时候不会进行,直到数据更新时才能使用
-	componentWillReceiveProps(nextProps){
+	UNSAFE_componentWillReceiveProps(nextProps){
 		console.log("componentWillReceiveProps",nextProps);
 	}
 	componentWillUnmount(){
