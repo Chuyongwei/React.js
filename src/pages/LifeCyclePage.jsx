@@ -12,10 +12,16 @@ class LifeCyclePage extends Component {
 		this.state = {count:0};
 		console.log("constructor");
 	}
-
-	UNSAFE_componentWillMount(){
-		console.log("componentWillMount");
+	// 在render之前调用,并且在更新时返回新的state,若null则不进行操作
+	static getDerivedStateFromProps(props,state){
+		const {count} = state
+		count > 5?console.log("getDerivedStateFromProps,大于5变为0"):	console.log("getDerivedStateFromProps",count);
+		return count>5?{count:0} : null
 	}
+
+	// UNSAFE_componentWillMount(){
+	// 	console.log("componentWillMount");
+	// }
 	componentDidMount(){
 		console.log("componentDidMount");
 	}
@@ -25,11 +31,20 @@ class LifeCyclePage extends Component {
 		// 是否渲染(数据变了)
 		return count!==3
 	}
-	UNSAFE_componentWillUpdate(){
-		console.log("componentWillUpdate");
+
+	//在render之后componentDidUpdate之前,返回的值可以被componentDidUpdate(prevProps,preState,snapshot)的snapshot接收
+	getSnapshotBeforeUpdate(prevProps,prevState){
+		console.log("getSnapshotBeforeUpdate",prevProps,prevState);
+		return {
+			msg:"我是get"
+		}
 	}
-	componentDidUpdate(){
-		console.log("componentDidUpdate");
+
+	// UNSAFE_componentWillUpdate(){
+	// 	console.log("componentWillUpdate");
+	// }
+	componentDidUpdate(prevProps,preState,snapshot){
+		console.log("componentDidUpdate",prevProps,preState,snapshot);
 	}
 	setCount = ()=>{
 		this.setState({count:this.state.count+1})
@@ -53,9 +68,9 @@ export default LifeCyclePage;
 
 class Child extends Component{
 	// 初次加载的时候不会进行,直到数据更新时才能使用
-	UNSAFE_componentWillReceiveProps(nextProps){
-		console.log("componentWillReceiveProps",nextProps);
-	}
+	// UNSAFE_componentWillReceiveProps(nextProps){
+	// 	console.log("componentWillReceiveProps",nextProps);
+	// }
 	componentWillUnmount(){
 		console.log("componentWillUnmount");
 	}

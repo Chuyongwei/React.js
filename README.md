@@ -134,3 +134,7 @@ npx react-codemod rename-unsafe-lifecycles <path>
 ```
 
 **不过最好能不要用**
+
+新生命周期
+
+> <font style="color:red">index.js:1 Warning: Unsafe legacy lifecycles will not be called for components using new component APIs.</font>
