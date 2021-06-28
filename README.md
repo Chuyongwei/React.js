@@ -119,3 +119,16 @@ class setSatePage extends Component {
 export default setSatePage;
 
 ``` 
+
+### 生命周期
+
+[图谱](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+![生命周期](https://pic1.zhimg.com/v2-4bc3a7a23ed8047eac25a62ef22cf205_1440w.jpg?source=172ae18b)
+
+[文档](https://react.docschina.org/docs/react-component.html)
+
+有很多的生命周期函数被废除了但是我们还要使用的话可以在函数前加`UNSAFE_`,也可以用下面的命令
+```powershell
+npx react-codemod rename-unsafe-lifecycles <path>
+```

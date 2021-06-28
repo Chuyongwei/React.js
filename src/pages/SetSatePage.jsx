@@ -22,7 +22,7 @@ class setSatePage extends Component {
 		// 	console.log("counter",this.state.counter);
 		// })
 
-		//链式调用,可以按顺序完成所有的操作
+		//链式调用,可以按顺序完成所有的操作,原理跟vuecli上的date的建立差不多
 		this.setState((state)=>{
 			console.log("counter",this.state.counter);
 			return {
