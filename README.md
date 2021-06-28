@@ -138,3 +138,67 @@ npx react-codemod rename-unsafe-lifecycles <path>
 新生命周期
 
 > <font style="color:red">index.js:1 Warning: Unsafe legacy lifecycles will not be called for components using new component APIs.</font>
+
+### 组件化的聚合
+
+页面
+
+```jsx
+import React, { Component } from "react";
+import Layout from "./Layout";
+
+class HomePage extends Component {
+  render() {
+    return (
+      <Layout showTopBar={false} showBottomBar={true} title="商城首页">
+        {/* <div>
+          <h3>HomePage</h3>
+        </div> */}
+        {{
+          content: (
+            <div>
+              <h3>HomePage</h3>
+            </div>
+          ),
+          text: "这是一个文本",
+          btnChilck: () => {
+						console.log("这是一个按钮");
+					},
+        }}
+      </Layout>
+    );
+  }
+}
+
+export default HomePage;
+```
+
+模板
+
+```jsx
+import React, { Component } from 'react';
+import BottomBar from './BottomBar';
+import TopBar from './TopBar';
+
+class Layout extends Component {
+	componentDidMount(){
+		const {title = "商城"} = this.props
+		document.title = title
+	}
+	render() {
+		const {children} = this.props
+		console.log("childer",children);
+		return (
+			<div >
+					<TopBar />
+					{children.content}
+					{children.text}
+					<button onClick={children.btnChilck}>点一下</button>
+					<BottomBar/>
+			</div>
+		);
+	}
+}
+
+export default Layout;
+```
