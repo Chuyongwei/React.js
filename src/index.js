@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from './App'
+import store from "./store";
 // impprt logo from './logo.svg'
 const name = "REACAr";
 // const logo = "./logo.svg"
@@ -31,5 +32,10 @@ const jsx = (
     {/* <img src={logo} classNames="logo"></img> */}
   </div>
 );
-
 ReactDOM.render(jsx, document.getElementById("root"));
+store.subscribe(()=>{
+	console.log("store发生了变化");
+	ReactDOM.render(<App/>, document.getElementById("root"));
+  // this.forceUpdate()
+})
+

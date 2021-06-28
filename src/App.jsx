@@ -3,17 +3,18 @@ import ClassComponent from './pages/ClassComponent'
 import FunctionComponent from './pages/FunctionComponent'
 import HomePage from './pages/HomePage'
 import LifeCyclePage from './pages/LifeCyclePage'
+import ReduxPages from './pages/ReduxPages'
 import SetSatePage from './pages/SetSatePage'
 
 export default function App() {
-	
 	return (
 		<div>
 			{/* <ClassComponent></ClassComponent> */}
 			{/* <FunctionComponent></FunctionComponent> */}
 			{/* <SetSatePage></SetSatePage> */}
 			{/* <LifeCyclePage></LifeCyclePage> */}
-			<HomePage/>
+			{/* <HomePage/> */}
+			<ReduxPages/>
 		</div>
 	)
 }

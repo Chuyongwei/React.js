@@ -202,3 +202,70 @@ class Layout extends Component {
 
 export default Layout;
 ```
+
+### Redux
+
+用于组件的数据传输和共享
+
+首先要安装插件
+
+```sh
+npm i redux -S
+```
+
+创建数据的共享store.js
+
+```js
+import { createStore } from "redux";
+
+function counterReducer(state=0, action) {
+  switch (action.type) {
+    case "ADD":
+      console.log(state);
+      return state + 1;
+    case "MINUS":
+      return state - 1;
+			default :return state
+  }
+  
+}
+
+const store = createStore(counterReducer);
+
+export default store
+```
+
+然后使用该store
+
+```jsx
+import React, { Component } from 'react';
+import store from '../store';
+
+class ReduxPages extends Component {
+	componentDidMount(){
+		// store.subscribe(()=>{
+		// 	console.log("store发生了变化");
+		// 	this.forceUpdate()
+		// })
+	}
+	render() {
+		console.log("store",store);
+		return (
+			<div>
+				<h1>ReduxPages</h1>
+				<p>{store.getState()}</p>	
+				<button onClick={()=>{store.dispatch({type:'ADD'})}}>+</button>
+			</div>
+		);
+	}
+}
+
+export default ReduxPages;
+```
+
+store
++ createStore: 创建store
++ dispatch:使用按照原先定义的方法将数据修改,提交更新
++ getState: 获取state的值
++  subscribe:数据修改了重新进行更新,变更订阅
++ 
