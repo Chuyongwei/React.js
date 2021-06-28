@@ -132,3 +132,5 @@ export default setSatePage;
 ```powershell
 npx react-codemod rename-unsafe-lifecycles <path>
 ```
+
+**不过最好能不要用**
