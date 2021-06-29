@@ -6,6 +6,43 @@
 	+ 引用方法
 	+ 循环
 	+ 条件语句
+
+	```js
+	import React from "react";
+	import ReactDOM from "react-dom";
+	import App from './App'
+	// impprt logo from './logo.svg'
+	const name = "REACAr";
+	// const logo = "./logo.svg"
+	const obj = {
+		firstname: "HAR",
+		nextname: "sss",
+	};
+	function forName(name) {
+		return name.firstname + " " + name.nextname;
+	}
+	const greet = <div>good</div>
+	const show = true
+	const a =[1,2,3]
+	const jsx = (
+		<div>
+			<App></App>
+			<h1>基本使用</h1>
+			<div>hello,{name}</div>
+			<div>{forName(obj)}</div>
+			{show?greet:"登录"}
+			{show&&greet}
+			{/* 登录 */}
+			<ul>
+				{a.map(item=>(
+					<li key={item}>{item}</li>
+				))}
+			</ul>
+			{/* <img src={logo} classNames="logo"></img> */}
+		</div>
+	);
+	ReactDOM.render(jsx, document.getElementById("root"));
+	```
 ## 组件
 + 类组件
 ```jsx
@@ -270,3 +307,63 @@ store函数
 + getState: 获取state的值
 +  subscribe:数据修改了重新进行更新,变更订阅
 + render:获取初始化
+
+**如何更新将更新的数据渲染到页面上**
+
+1. 在该组件前添加	`store.subscribe`重新订阅
+
+```js
+componentDidMount(){
+		store.subscribe(()=>{
+			console.log("store发生了变化");
+			this.forceUpdate()
+		})
+	}
+```
+
+2. 全局方式
+
+index.js
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from './App'
+import store from "./store";
+
+ReactDOM.render(<App/>, document.getElementById("root"));
+store.subscribe(()=>{
+	console.log("store发生了变化");
+	ReactDOM.render(<App/>, document.getElementById("root"));
+  // this.forceUpdate()
+})
+```
+
+
+
+### react -redux
+
+#### 安装
+
+```sh
+npm install react-redux --save
+```
+
+src/index.js
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css"
+import App from './App'
+import store from "./store";
+import { Provider } from 'react-redux';
+
+ReactDOM.render(jsx, document.getElementById("root"));
+store.subscribe(()=>{
+	console.log("store发生了变化");
+	ReactDOM.render(<App/>, document.getElementById("root"));
+  // this.forceUpdate()
+})
+
+```
