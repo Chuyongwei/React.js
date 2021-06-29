@@ -263,9 +263,10 @@ class ReduxPages extends Component {
 export default ReduxPages;
 ```
 
-store
+store函数
+
 + createStore: 创建store
 + dispatch:使用按照原先定义的方法将数据修改,提交更新
 + getState: 获取state的值
 +  subscribe:数据修改了重新进行更新,变更订阅
-+ 
++ render:获取初始化
