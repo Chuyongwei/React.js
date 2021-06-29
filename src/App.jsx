@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage'
 import LifeCyclePage from './pages/LifeCyclePage'
 import ReactReduxPage from './pages/ReactReduxPage'
 import ReduxPages from './pages/ReduxPages'
+import RouterPage from './pages/RouterPage'
 import SetSatePage from './pages/SetSatePage'
 
 export default function App() {
@@ -16,7 +17,8 @@ export default function App() {
 			{/* <LifeCyclePage></LifeCyclePage> */}
 			{/* <HomePage/> */}
 			{/* <ReduxPages/> */}
-			<ReactReduxPage/>
+			{/* <ReactReduxPage/> */}
+			<RouterPage/>
 		</div>
 	)
 }
