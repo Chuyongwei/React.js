@@ -349,21 +349,80 @@ store.subscribe(()=>{
 npm install react-redux --save
 ```
 
-src/index.js
+#### 使用
+
++ 创建一个数据仓库store
+
+store/index.js
+
+```js
+import { createStore } from "redux";
+
+function counterReducer(state=0, action) {
+  switch (action.type) {
+    case "ADD":
+      console.log(state);
+      return state + 1;
+    case "MINUS":
+      return state - 1;
+			default :return state
+  }
+  
+}
+
+const store = createStore(counterReducer);
+
+export default store
+```
+
++ src/index.js
 
 ```js
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css"
 import App from './App'
 import store from "./store";
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux'
 
-ReactDOM.render(jsx, document.getElementById("root"));
-store.subscribe(()=>{
-	console.log("store发生了变化");
-	ReactDOM.render(<App/>, document.getElementById("root"));
-  // this.forceUpdate()
-})
+ReactDOM.render(
+  //设置仓库
+  <Provider store={store}>
+    <App/>
+  </Provider>
+
+, document.getElementById("root"));
 
 ```
+
++ 页面
+
+```jsx
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+
+
+class ReactReduxPage extends Component {
+	render() {
+		console.log("props",this.props);
+		const {num,dispatch,add} = this.props
+		return (
+			<div>
+				<h3>ReactReduxPage</h3>			
+				<p>{num}</p>
+				{/* <button onClick={()=>dispatch({type:"ADD"})}>add</button> */}
+				<button onClick={add}>add</button>
+			</div>
+		);
+	}
+}
+
+export default connect(
+	state=>({num:state}),
+	{
+		add:()=>({type:"ADD"})
+	}
+)(ReactReduxPage);
+```
+
+好处的话就是在数据更新的时候,我们不用自己渲染页面
