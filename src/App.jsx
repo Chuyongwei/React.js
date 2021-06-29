@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import ClassComponent from './pages/ClassComponent'
+import CustomHookPage from './pages/CustomHookPage';
 import FunctionComponent from './pages/FunctionComponent'
 import HomePage from './pages/HomePage'
+import Hookpage from './pages/Hookpage'
 import LifeCyclePage from './pages/LifeCyclePage'
+import PureComponentPage from './pages/PureComponentPage'
 import ReactReduxPage from './pages/ReactReduxPage'
 import ReduxPages from './pages/ReduxPages'
 import RouterPage from './pages/RouterPage'
@@ -18,7 +21,10 @@ export default function App() {
 			{/* <HomePage/> */}
 			{/* <ReduxPages/> */}
 			{/* <ReactReduxPage/> */}
-			<RouterPage/>
+			{/* <RouterPage/> */}
+			{/* <PureComponentPage/> */}
+			<Hookpage/>
+			<CustomHookPage/>
 		</div>
 	)
 }
