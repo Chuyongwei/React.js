@@ -1,70 +1,161 @@
-# Getting Started with Create React App
+# 基础
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## HOC
 
-## Available Scripts
+### 导学
 
-In the project directory, you can run:
+```jsx
+import React, { Component } from "react";
 
-### `npm start`
+// HOC:是个函数,接受一个组件,返回一个新组件
+function Child(props) {
+  return <div>Child</div>;
+}
+// Cmp参数,这里我们会导入一个组件,额....jsx语法
+const foo = Cmp => props => {
+  return (
+    <div className="border">
+      <Cmp {...props} />
+    </div>
+  );
+};
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+// 上面函数的解析
+// const foo = (Cmp) => {
+//   return (props) => {
+//     return (
+//       <div className="border">
+//         <Cmp {...props} />
+//       </div>
+//     );
+//   };
+// };
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+const foo2 = Cmp=>props =>{
+	return(
+		<div className="greenBorder">
+			<Cmp {...props}/>
+		</div>
+	)
+}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const Foo = foo2(foo(Child));
+export default class HocPage extends Component {
+  render() {
+    return (
+      <div>
+        <h3>HocPage</h3>
+        <Foo/>
+        {/* <Child/> */}
+      </div>
+    );
+  }
+}
+```
 
-### `npm run build`
+### 装饰者模式
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+npm install antd
+npm install react-app-rewired customize-cra babel-plugin-import
+```
 
-### `npm run eject`
+根目录创建`config-overrides.js`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```js
+const { override, fixBabelImports, addLessLoader, addWebpackAlias } = require("customize-cra");
+const path = require("path");
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+module.exports = override(
+  // 针对antd 实现按需打包：根据import来打包 (使用babel-plugin-import)  
+  fixBabelImports("import", {    
+    libraryName: "antd",    
+    libraryDirectory: "es",    
+    style: true, //自动打包相关的样式 默认为 style:'css'  
+  }),
+  // 使用less-loader对源码重的less的变量进行重新制定，设置antd自定义主题  
+  addLessLoader({  
+    javascriptEnabled: true,    
+    modifyVars: { "@primary-color": "#1DA57A" },  
+  }),
+  //增加路径别名的处理 
+  addWebpackAlias({  
+    '@': path.resolve('./src')  
+  })
+); 
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+修改package.json
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```json
+ "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react--app-rewired test",
+    "eject": "react-scripts eject"
+  },
+```
 
-## Learn More
+使用
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```jsx
+import React, { Component } from "react";
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+// HOC:是个函数,接受一个组件,返回一个新组件
+// function Child(props) {
+//   return <div>Child</div>;
+// }
+// Cmp参数,这里我们会导入一个组件,额....jsx语法
+const foo = Cmp => props => {
+  return (
+    <div className="border">
+      <Cmp {...props} />
+    </div>
+  );
+};
 
-### Code Splitting
+// 上面函数的解析
+// const foo = (Cmp) => {
+//   return (props) => {
+//     return (
+//       <div className="border">
+//         <Cmp {...props} />
+//       </div>
+//     );
+//   };
+// };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+const foo2 = Cmp=>props =>{
+	return(
+		<div className="greenBorder">
+			<Cmp {...props}/>
+		</div>
+	)
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+//装饰者模式
+@foo2
+@foo
+class Child extends Component{
+  render(){
+    return <div>Child</div>;
+  }
+}
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+const Foo = foo2(foo(Child));
+export default class HocPage extends Component {
+  render() {
+    return (
+      <div>
+        <h3>HocPage</h3>
+        {/* <Foo/> */}
+        <Child/>
+      </div>
+    );
+  }
+}
+```
