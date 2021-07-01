@@ -1,48 +1,51 @@
-## REACT 学习(开课吧)
+# REACT 学习(开课吧)
 
-## 基本使用
-+ jsx语法
-	+ 引用变量
-	+ 引用方法
-	+ 循环
-	+ 条件语句
+# 基本使用
 
-	```js
-	import React from "react";
-	import ReactDOM from "react-dom";
-	import App from './App'
-	// impprt logo from './logo.svg'
-	const name = "REACAr";
-	// const logo = "./logo.svg"
-	const obj = {
-		firstname: "HAR",
-		nextname: "sss",
-	};
-	function forName(name) {
-		return name.firstname + " " + name.nextname;
-	}
-	const greet = <div>good</div>
-	const show = true
-	const a =[1,2,3]
-	const jsx = (
-		<div>
-			<App></App>
-			<h1>基本使用</h1>
-			<div>hello,{name}</div>
-			<div>{forName(obj)}</div>
-			{show?greet:"登录"}
-			{show&&greet}
-			{/* 登录 */}
-			<ul>
-				{a.map(item=>(
-					<li key={item}>{item}</li>
-				))}
-			</ul>
-			{/* <img src={logo} classNames="logo"></img> */}
-		</div>
-	);
-	ReactDOM.render(jsx, document.getElementById("root"));
-	```
+## jsx语法
+
++ 引用变量
++ 引用方法
++ 循环
++ 条件语句
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from './App'
+// impprt logo from './logo.svg'
+const name = "REACAr";
+// const logo = "./logo.svg"
+const obj = {
+	firstname: "HAR",
+	nextname: "sss",
+};
+function forName(name) {
+	return name.firstname + " " + name.nextname;
+}
+const greet = <div>good</div>
+const show = true
+const a =[1,2,3]
+const jsx = (
+	<div>
+		<App></App>
+		<h1>基本使用</h1>
+		<div>hello,{name}</div>
+		<div>{forName(obj)}</div>
+		{show?greet:"登录"}
+		{show&&greet}
+		{/* 登录 */}
+		<ul>
+			{a.map(item=>(
+				<li key={item}>{item}</li>
+			))}
+		</ul>
+		{/* <img src={logo} classNames="logo"></img> */}
+	</div>
+);
+ReactDOM.render(jsx, document.getElementById("root"));
+```
+
 ## 组件
 + 类组件
 ```jsx
@@ -102,12 +105,12 @@ export default function FunctionComponent() {
 		</div>
 	)
 }
- ```
+```
 
  ## 技巧
- 
+
  ### setState
- 
+
  ```jsx
  import React, { Component } from 'react';
 
@@ -155,7 +158,7 @@ class setSatePage extends Component {
 
 export default setSatePage;
 
-``` 
+ ```
 
 ### 生命周期
 
@@ -240,7 +243,7 @@ class Layout extends Component {
 export default Layout;
 ```
 
-### Redux
+## Redux
 
 用于组件的数据传输和共享
 
@@ -427,7 +430,7 @@ export default connect(
 
 好处的话就是在数据更新的时候,我们不用自己渲染页面
 
-### React-Router
+## React-Router
 
 ### 安装
 
