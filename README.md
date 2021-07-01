@@ -159,3 +159,12 @@ export default class HocPage extends Component {
   }
 }
 ```
+
+## Antd表单
+
+世上没有捷径老老实实的从头看完[官方文档](https://ant.design/components/form-cn/#components-form-demo-required-mark)吧,更新挺快的网上没有答案
+
+安装
+```sh
+npm i antd
+```
