@@ -25,7 +25,7 @@ export default class FormPage3 extends Component{
 	render(){
 		return (
 			<div>
-
+				<h3>FormPage3</h3>
 		<Form {...formItemLayout}>
 			<Form.Item
 				label="Fail"
