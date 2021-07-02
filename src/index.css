@@ -14,8 +14,21 @@ code {
 
 .border{
   border: 1px red solid;
+  color: red;
 }
 
 .greenBorder{
   border: 2px green double;
+}
+
+.red{
+  color: red;
+}
+
+.green{
+  color: green;
+}
+
+.pink{
+  color: pink;
 }

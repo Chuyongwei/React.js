@@ -55,6 +55,7 @@ class FormPage2 extends Component {
         },
       },
     };
+    
     const validateMessages = {
       required: "${label} is required!",
       types: {

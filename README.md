@@ -168,3 +168,122 @@ export default class HocPage extends Component {
 ```sh
 npm i antd
 ```
+
+## Context
+
++ 使用
+
++ 创建上下文
+
+ThemeContext.js
+
+  ```js
+  import React from "react";
+
+  // 创建context 农民种菜, 如果没有匹配到Provider，取值默认值
+  export const ThemeContext = React.createContext({themeColor: "pink"});
+  // 接收者 批发商批发菜
+  export const ThemeProvider = ThemeContext.Provider;
+
+  //消费者 吃菜
+  export const ThemeConsumer = ThemeContext.Consumer;
+
+  ```
+  
++ 两个文件
+```jsx
+  import React, {Component} from "react";
+import ContextTypePage from "./ContextTypePage";
+import {ThemeProvider} from "../../ThemeContext";
+
+// 使用contetx步骤
+// 1. 创建 createContext
+// 2. Proiver接收value，以保证有传下去的数据
+// 3. 接收 Consumer或者class.contextType
+
+export default class ContextPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: {
+        themeColor: "red"
+      },
+      user: {
+        name: "xiaoming"
+      }
+    };
+  }
+  changeColor = () => {
+    const {themeColor} = this.state.theme;
+    this.setState({
+      theme: {
+        themeColor: themeColor === "red" ? "green" : "red"
+      }
+    });
+  };
+  render() {
+    const {theme, user} = this.state;
+    return (
+      <div>
+        <button onClick={this.changeColor}>change color</button>
+        <h3>ContextPage</h3>
+        <ThemeProvider value={theme}>
+          {/* 只能订阅一个context */}
+          <ContextTypePage />
+        </ThemeProvider>
+      </div>
+    );
+  }
+}
+```
+
+文件2
+
+```jsx
+import React, {Component} from "react";
+import {ThemeContext} from "../../ThemeContext";
+
+class ContextTypePage extends Component {
+  // static contextType = ThemeContext;
+  render() {
+    console.log("this", this); //sy-log
+    // this.context在任何生命周期都可以访问到
+    const {themeColor} = this.context;
+    return (
+      <div className="border">
+        <h3 className={themeColor}>ContextTypePage</h3>
+      </div>
+    );
+  }
+}
+// 只能订阅一个context 并且是类组件
+ContextTypePage.contextType = ThemeContext;
+export default ContextTypePage;
+```
+
+上面的方式只能订阅一次
+
+要想订阅多个我们要用消费者模式创建
+
+```jsx
+import React, {useState, useEffect} from "react";
+import {ThemeConsumer} from "../../ThemeContext";
+
+export default function ConsumerPage(props) {
+  return (
+    <div className="border">
+      <h3>ConsumerPage</h3>
+      <ThemeConsumer>
+        {ctx => <div className={ctx.themeColor}>文本</div>}
+      </ThemeConsumer>
+    </div>
+  );
+}
+```
+
+**注意**:子组件的订阅要和父组件对应
+
+## Redux
+
+![Redux组成](https://upload-images.jianshu.io/upload_images/1512918-7a49c1a5f8dd636b.png?imageMogr2/auto-orient/strip|imageView2/2/w/600/format/webp)
+
