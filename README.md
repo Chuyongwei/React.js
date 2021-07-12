@@ -287,3 +287,11 @@ export default function ConsumerPage(props) {
 
 ![Redux组成](https://upload-images.jianshu.io/upload_images/1512918-7a49c1a5f8dd636b.png?imageMogr2/auto-orient/strip|imageView2/2/w/600/format/webp)
 
+```sh
+npm install redux --save
+```
+
+异步
+```sh
+npm install redux-thunk redux-logger --save
+```
