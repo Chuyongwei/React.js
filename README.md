@@ -4,6 +4,8 @@
 
 ### 导学
 
+> HOC:是个函数,接受一个组件,返回一个新组件
+
 ```jsx
 import React, { Component } from "react";
 
@@ -189,7 +191,7 @@ ThemeContext.js
   export const ThemeConsumer = ThemeContext.Consumer;
 
   ```
-  
+
 + 两个文件
 ```jsx
   import React, {Component} from "react";
@@ -334,8 +336,7 @@ npm install redux-thunk redux-logger --save
     // import { connect } from 'react-redux';
     import {connect} from '../../kReactRedux';
     import { bindActionCreators } from 'redux';
-
-
+    
     // connect 连接store与组件 其实这里返回的是一个新组件
     export default connect (
       (state) =>({count: state}),
@@ -348,7 +349,7 @@ npm install redux-thunk redux-logger --save
       // 		count: state
       // 	}
       // }
-
+    
       // mapDispatchtoProps Object
       //如果不指定mapDisPatchToProps,默认props会被注入dispatch本身
       //object,Dispatch本身不会被注入props
@@ -401,8 +402,27 @@ npm install redux-thunk redux-logger --save
   ## React-Router
 
   + 安装
+
     ```sh
     npm install --save react-router-dom
     ```
 
-    渲染Route优先级render
+### 渲染
+  + 渲染Route优先级: childer>component>render
+
+    > 渲染component的时候会调用React.createElement，如果使用下面这种匿名函数的形式，每次都会生成一个新的匿名的函数, 导致生成的组件的type总是不相同，这个时候会产生重复的卸载和挂载 
+
+    component方式渲染时会一直挂载,卸载
+    ```jsx
+    <Route component={() => <Child count={count} />} />
+    ```
+
+    正确的方法
+    
+    ```jsx
+    <Route render={() => <Child count={count} />} />
+    ```
+
+    ### 动态路由
+
+    
