@@ -5,6 +5,7 @@ import {createStore, applyMiddleware} from "../kRedux";
 
 // 定义修改规则
 function countReducer(state = 0, action) {
+  console.log("state",state);
   switch (action.type) {
     case "ADD":
       return state + 1;

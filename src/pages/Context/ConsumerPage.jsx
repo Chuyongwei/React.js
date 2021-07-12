@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {ThemeConsumer} from "../../ThemeContext";
 
 export default function ConsumerPage(props) {
