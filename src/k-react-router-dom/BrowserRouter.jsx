@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { createBrowserHistory } from 'history';
 import { RouterContext } from './RouterContext';
-import { Provider } from 'react-redux';
 
 class BrowserRouter extends Component {
 	constructor(props){

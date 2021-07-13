@@ -17,14 +17,14 @@ class Route extends Component {
     return (
       <RouterContext.Consumer>
         {(context) => {
-          const { path, children, component, render } = this.props;
+          const {  children, component, render } = this.props;
           //路径匹配
           // const match = context.location.pathname === path;
           const location = this.props.location || context.location;
           //只有匹配了才能有值
           const match = matchPath(location.pathname, this.props);
-          // console.log("match",match);
-          const props = {
+          console.log("match",match);
+          const props = {//构成最新的参数,
             ...context,
             location,
             match,
@@ -33,19 +33,24 @@ class Route extends Component {
           // match的时候如果children存在:function或者children本身
           // 不match children 或者 null
           // children是匹配无关
-          return match
-            ? children
-              ? typeof children === "function"
-                ? children(props)
-                : children
-              : component
-              ? React.createElement(component, props)
-              : render
-              ? render(props)
-              : null
-            : typeof children === "function"
-            ? children(props)
-            : null;
+          // 覆盖上层的数据.更新数据,所以我们包一个context,比如我们要有match参数,也可以说我们想增加一些参数
+          return(
+          <RouterContext.Provider value={props}>
+            {match
+              ? children
+                ? typeof children === "function"
+                  ? children(props)
+                  : children
+                : component
+                ? React.createElement(component, props)
+                : render
+                ? render(props)
+                : null
+              : typeof children === "function"
+              ? children(props)
+              : null}
+          </RouterContext.Provider> 
+          )
           // return match ? React.createElement(component, this.props) : null;
         }}
       </RouterContext.Consumer>
