@@ -7,7 +7,9 @@ import Switch from "./k-react-router-dom/Switch";
 import HomePage from "./pages/HomePage";
 import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
+import PrivateRoute from "./pages/PrivateRoute";
 // import PrivateRoute from "./pages/PrivateRoute";
+import Other from './pages/Other';
 
 function App() {
   return (
@@ -30,10 +32,9 @@ function App() {
         {/* <Switch location={{pathname:"/user"}}> */}
         <Switch >
           <Route exact path="/" component={HomePage} />
-          <Route path="/user" component={UserPage} />
-          {/* <PrivateRoute path="/user" component={UserPage} /> */}
-          <Route path="/login" render={LoginPage} />
-
+          {/* <Route path="/user" component={UserPage} /> */}
+          <PrivateRoute path="/user" component={UserPage} />
+          <Route path="/login" component={LoginPage} />
           <Route path="/children" children={() => <div>children</div>} />
           <Route path="/render" render={() => <div>render</div>} />
           <Route path="/search/:id" component={SearchComponent}></Route>

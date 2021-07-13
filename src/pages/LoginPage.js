@@ -1,6 +1,8 @@
 import React, {Component} from "react";
-import {Redirect} from "react-router-dom";
+// import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
+import Redirect from "../k-react-router-dom/Redirect";
+
 
 export default connect(
   // mapStateToProps
@@ -13,7 +15,7 @@ export default connect(
   class LoginPage extends Component {
     render() {
       const {isLogin, login, location} = this.props;
-      const {redirect = "/"} = location.state || {};
+      const {redirect = "/user"} = location.state || {};
       console.log("props", this.props); //sy-log
       if (isLogin) {
         // 已经登录
