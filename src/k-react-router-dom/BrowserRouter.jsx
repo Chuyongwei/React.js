@@ -3,6 +3,14 @@ import { createBrowserHistory } from 'history';
 import { RouterContext } from './RouterContext';
 
 class BrowserRouter extends Component {
+	static computeRootMatch(pathname){
+		return {
+			path:"/",
+			url: "/",
+			params:{},
+			isExact:pathname==="/"
+		}
+	}
 	constructor(props){
 		super(props)
 		this.state={};
@@ -24,7 +32,12 @@ class BrowserRouter extends Component {
 	render() {
 		return  (
 			// <div>{this.props.children}</div>
-		<RouterContext.Provider value={{history: this.history,location:this.state.location}}>
+		<RouterContext.Provider 
+		value={{
+			history: this.history,
+			location:this.state.location,
+			match: BrowserRouter.computeRootMatch(this.state.location.pathname)
+			}}>
 			{this.props.children}
 		</RouterContext.Provider> 
 		)

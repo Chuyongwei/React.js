@@ -4,7 +4,7 @@ import { RouterContext } from "./RouterContext";
 
 class Switch extends Component {
   render() {
-    // return this.props.children
+    // return this.props.children 数组形式 对象
     return (
       <RouterContext.Consumer>
         {(context) => {
@@ -15,6 +15,18 @@ class Switch extends Component {
           let element,
             match = null;
           const { children } = this.props;
+          // children = [children]
+          // // this.props.children
+          // for (let i = 0; i < children.length; i++) {
+          //   let child = children[i];
+          //   if (match === null && React.isValidElement(child)) {
+          //     element = child;
+          //     const path = child.props.path;
+          //     match = path
+          //       ? matchPath(location.pathname, { ...child.props, path })
+          //       : context.match;
+          //   }
+          // }
           React.Children.forEach(children, (child) => {
             if (match === null && React.isValidElement(child)) {
               element = child;
@@ -26,7 +38,20 @@ class Switch extends Component {
               // console.log("match",match,context.match);
             }
           });
-          return match ? React.cloneElement(element, {}) : null;
+
+          // createElement
+          // return match
+          //   ? React.createElement(element.type, {
+          //       ...element.props,
+          //       location,
+          //       computedMatch: match,
+          //     })
+          //   : null;
+
+          // cloneElement
+          return match
+            ? React.cloneElement(element, { location, computedMatch: match })
+            : null;
         }}
       </RouterContext.Consumer>
     );

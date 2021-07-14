@@ -9,7 +9,6 @@ import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./pages/PrivateRoute";
 // import PrivateRoute from "./pages/PrivateRoute";
-import Other from './pages/Other';
 
 function App() {
   return (
@@ -38,6 +37,8 @@ function App() {
           <Route path="/children" children={() => <div>children</div>} />
           <Route path="/render" render={() => <div>render</div>} />
           <Route path="/search/:id" component={SearchComponent}></Route>
+          {/* 如果Route没有path参数，将始终被匹配 */}
+          <Route render={()=><div>404</div>}/>
         </Switch>
       </Router>
     </div>

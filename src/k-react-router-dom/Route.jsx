@@ -17,13 +17,13 @@ class Route extends Component {
     return (
       <RouterContext.Consumer>
         {(context) => {
-          const {  children, component, render } = this.props;
+          const {path,  children, component, render,computedMatch } = this.props;
           //路径匹配
           // const match = context.location.pathname === path;
           const location = this.props.location || context.location;
           //只有匹配了才能有值
-          const match = matchPath(location.pathname, this.props);
-          console.log("match",match);
+          const match = computedMatch?computedMatch:path? matchPath(location.pathname, this.props):context.match;
+          console.log("match",match,location.pathname,this.props);
           const props = {//构成最新的参数,
             ...context,
             location,
