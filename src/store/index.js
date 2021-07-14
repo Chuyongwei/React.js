@@ -3,7 +3,7 @@ import {createStore, applyMiddleware} from "../kRedux";
 // import thunk from "redux-thunk";
 // import logger from "redux-logger";
 
-// 定义修改规则
+// 定义修改规则,返回修改后的仓库内容,对于state我们要设置默认值
 function countReducer(state = 0, action) {
   console.log("state",state);
   switch (action.type) {

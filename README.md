@@ -312,6 +312,50 @@ npm install redux-thunk redux-logger --save
 
 1. 配置`store`(数据仓库)
 
+```js
+// import {createStore, applyMiddleware} from "redux";
+import {createStore, applyMiddleware} from "../kRedux";
+// import thunk from "redux-thunk";
+// import logger from "redux-logger";
+
+// 定义修改规则,返回修改后的仓库内容,对于state我们要设置默认值
+function countReducer(state = 0, action) {
+  console.log("state",state);
+  switch (action.type) {
+    case "ADD":
+      return state + 1;
+    case "MINUS":
+      return state - 1;
+    default:
+      return state;
+  }
+}
+
+const store = createStore(countReducer, applyMiddleware(thunk, logger));
+
+export default store;
+
+function logger({getState, dispatch}) {
+  return dispatch => action => {
+    console.log(action.type + "执行了"); //sy-log
+    return dispatch(action);
+  };
+}
+
+function thunk({getState, dispatch}) {
+  return dispatch => action => {
+    // action 可以是对象 还可以是函数 ，那不同的形式，操作也不同
+    if (typeof action === "function") {
+      return action(dispatch, getState);
+    } else {
+      return dispatch(action);
+    }
+  };
+}
+
+
+```
+
 2. 在redux上部署
 
     ``` jsx
@@ -401,6 +445,8 @@ npm install redux-thunk redux-logger --save
 
   ## React-Router
 
+  [Router路由](https://react-router.docschina.org/web/api/HashRouter)
+
   + 安装
 
     ```sh
@@ -423,6 +469,25 @@ npm install redux-thunk redux-logger --save
     <Route render={() => <Child count={count} />} />
     ```
 
-    ### 动态路由
+### 动态路由
 
-    
+### 手写router代码
+
+在[router分支](../web16-react-router)
+
+## Generator
+
+```js
+function* helloWorldGenertaor(){
+  yield "hello"
+  yield "world"
+  return "ending"
+}
+
+var hw = helloWorldGenertaor()// 返回的是一个遍历器对象
+
+console.log(hw.next())  
+console.log(hw.next()) // 只有调用next方法才会遍历下一个内部状态
+console.log(hw.next())
+console.log(hw.next())
+```
